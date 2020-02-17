@@ -36,10 +36,25 @@ module.exports = {
         ],
       },
       {
-        test: /\.css$/, 
+        test: /\.css$/,
+        exclude: /node_modules/,
         use: [
-          MiniCssExtractPlugin.loader, 'css-loader'
-        ]
+          {
+            loader: MiniCssExtractPlugin.loader,
+          },
+          {
+            loader: 'css-loader',
+            options: {importLoaders: 1},
+          },
+          {
+            loader: 'postcss-loader',
+            options: {
+              config: {
+                path: __dirname + '/postcss.config.js'
+              }
+            },
+          },
+        ],
       },
       {
         test: /\.js$/,
