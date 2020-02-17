@@ -6,12 +6,12 @@ const devWebpackConfig = merge(baseWebpackConfig, {
   mode: 'development',
   devServer: {
     port: 8080,
-    hot: true
+    hot: true,
   },
   module: {
-    rules: []
+    rules: [],
   },
-  plugins: []
+  plugins: [],
 })
 
 module.exports = devWebpackConfig

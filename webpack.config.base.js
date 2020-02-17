@@ -8,7 +8,7 @@ module.exports = {
   context: path.resolve(__dirname, 'src'),
   entry: './main.js',
   output: {
-    filename: `main.[hash].js`, 
+    filename: `main.[hash].js`,
     path: path.resolve(__dirname, './dist'),
   },
   resolve: {
@@ -22,10 +22,10 @@ module.exports = {
           {
             loader: 'file-loader',
             options: {
-              name: `fonts/[name].[ext]`
-            }
-          }
-        ]
+              name: `fonts/[name].[ext]`,
+            },
+          },
+        ],
       },
       {
         test: /\.(png|jpg|svg|gif)$/,
@@ -44,14 +44,14 @@ module.exports = {
           },
           {
             loader: 'css-loader',
-            options: {importLoaders: 1},
+            options: { importLoaders: 1 },
           },
           {
             loader: 'postcss-loader',
             options: {
               config: {
-                path: __dirname + '/postcss.config.js'
-              }
+                path: __dirname + '/postcss.config.js',
+              },
             },
           },
         ],
@@ -60,10 +60,10 @@ module.exports = {
         test: /\.js$/,
         exclude: /(node_modules)/,
         use: {
-          loader: ['babel-loader', "eslint-loader"],
-        }
-      }
-    ]
+          loader: ['babel-loader', 'eslint-loader'],
+        },
+      },
+    ],
   },
   plugins: [
     new MiniCssExtractPlugin({
@@ -74,7 +74,7 @@ module.exports = {
       filename: 'index.html',
     }),
     new CopyWebpackPlugin([
-      {from:'./assets/images', to:`images/[name].[ext]`, ignore: ['.DS_Store']}
+      { from: './assets/images', to: `images/[name].[ext]`, ignore: ['.DS_Store'] },
     ]),
-  ]
+  ],
 }
