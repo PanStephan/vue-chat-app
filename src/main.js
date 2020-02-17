@@ -1,6 +1,7 @@
 import './styles/styles.css'
 
 
+let s;
 let person =                     {
   name: "Yoda",
                 designation: 'Jedi Master '
