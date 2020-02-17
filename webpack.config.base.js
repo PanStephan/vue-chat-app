@@ -1,8 +1,11 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const { VueLoaderPlugin } = require('vue-loader')
 
 const path = require('path')
+
+const isDev = process.env.NODE_ENV === "production" ? false : true
 
 module.exports = {
   context: path.resolve(__dirname, 'src'),
@@ -12,7 +15,7 @@ module.exports = {
     path: path.resolve(__dirname, './dist'),
   },
   resolve: {
-    extensions: ['.js', '.json'],
+    extensions: ['.js', '.json', '.vue'],
   },
   module: {
     rules: [
@@ -36,7 +39,7 @@ module.exports = {
         ],
       },
       {
-        test: /\.css$/,
+        test: /\.css|postcss$/,
         exclude: /node_modules/,
         use: [
           {
@@ -60,8 +63,15 @@ module.exports = {
         test: /\.js$/,
         exclude: /(node_modules)/,
         use: {
-          loader: ['babel-loader', 'eslint-loader'],
+          loader: 'babel-loader',
+          loader: 'eslint-loader'
         },
+      },
+      {
+        test: /\.vue$/,
+        use: {
+          loader: 'vue-loader',
+        } 
       },
     ],
   },
@@ -72,9 +82,18 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: 'views/index.html',
       filename: 'index.html',
+      minify: {
+        collapseWhitespace: !isDev,
+        removeComments: !isDev,
+        removeRedundantAttributes: !isDev,
+        removeScriptTypeAttributes: !isDev,
+        removeStyleLinkTypeAttributes: !isDev,
+        useShortDoctype: !isDev
+      },
     }),
     new CopyWebpackPlugin([
       { from: './assets/images', to: `images/[name].[ext]`, ignore: ['.DS_Store'] },
     ]),
+    new VueLoaderPlugin(),
   ],
 }
