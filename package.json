@@ -14,7 +14,7 @@
     }
   },
   "lint-staged": {
-    "*.{js}": [
+    "src/*.{js}": [
       "eslint",
       "prettier --list-different --write"
     ]
