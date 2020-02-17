@@ -5,7 +5,7 @@
   "private": true,
   "scripts": {
     "build": "cross-env NODE_ENV=production webpack --config webpack.config.prod.js",
-    "serve": "cross-env NODE_ENV=development webpack-dev-server --config webpack.config.dev.js",
+    "serve": "cross-env NODE_ENV=development webpack-dev-server --config webpack.config.dev.js --watch",
     "prettier": "prettier --write \"src/*.js\"",
     "lint": "eslint \"src/*.js\"",
     "pre-commit": "lint-staged"
@@ -63,12 +63,19 @@
     "postcss-preset-env": "^6.7.0",
     "prettier": "^1.19.1",
     "terser-webpack-plugin": "^2.3.2",
+    "vue-loader": "^15.9.0",
+    "vue-style-loader": "^4.1.2",
+    "vue-template-compiler": "^2.6.11",
     "webpack": "^4.41.5",
     "webpack-cli": "^3.3.10",
     "webpack-dev-server": "^3.10.1",
     "webpack-merge": "^4.2.2"
   },
-  "dependencies": {},
+  "dependencies": {
+    "vue": "^2.6.11",
+    "vue-router": "^3.1.5",
+    "vuex": "^3.1.2"
+  },
   "author": "stephan.startsev@gmail.com",
   "license": "MIT"
 }

@@ -11,12 +11,21 @@ const prodWebpackConfig = merge.smart(baseWebpackConfig, {
     splitChunks: {
       chunks: 'all',
     },
-    minimizer: [new OptimizeCssAssetWebpackPlugin(), new TerserWebpackPlugin()],
+    minimizer: [
+      new OptimizeCssAssetWebpackPlugin({
+        cssProcessor: require("cssnano"),
+        cssProcessorPluginOptions: {
+          preset: ["default", { discardComments: { removeAll: true } }]
+        }
+      }),
+      new TerserWebpackPlugin()],
   },
   module: {
     rules: [],
   },
-  plugins: [new CleanWebpackPlugin()],
+  plugins: [
+    new CleanWebpackPlugin(),
+  ],
 })
 
 module.exports = prodWebpackConfig

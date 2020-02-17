@@ -1,16 +1,7 @@
-import './styles/styles.css'
+import Vue from 'vue'
+import App from './components/App'
+import './assets/styles/styles.css'
 
-let person = {
-  name: 'Yoda',
-  designation: 'Jedi Master ',
-}
-
-function trainJedi(jediWarrion) {
-  if (jediWarrion.name === 'Yoda') {
-    console.log('No need! already trained')
-  }
-  console.log(`Training ${jediWarrion.name} complete`)
-}
-
-trainJedi(person)
-trainJedi({ name: 'Adeel', designation: 'padawan' })
+new Vue({
+  render: h => h(App),
+}).$mount('#app')
