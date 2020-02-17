@@ -1,0 +1,39 @@
+{
+  "name": "chat-app",
+  "version": "0.0.1",
+  "description": "vue js fullstack web-app",
+  "private": true,
+  "scripts": {
+    "build": "cross-env NODE_ENV=production webpack --config webpack.config.prod.js",
+    "serve": "cross-env NODE_ENV=development webpack-dev-server --config webpack.config.dev.js"
+  },
+  "keywords": [
+    "vuejs",
+    "socket.io",
+    "post-css",
+    "webpack",
+    "nodejs"
+  ],
+  "devDependencies": {
+    "@babel/core": "^7.8.4",
+    "@babel/preset-env": "^7.8.4",
+    "babel-loader": "^8.0.6",
+    "clean-webpack-plugin": "^3.0.0",
+    "copy-webpack-plugin": "^5.1.1",
+    "cross-env": "^6.0.3",
+    "css-loader": "^3.4.2",
+    "file-loader": "^5.0.2",
+    "html-webpack-plugin": "^3.2.0",
+    "mini-css-extract-plugin": "^0.9.0",
+    "node-sass": "^4.13.1",
+    "optimize-css-assets-webpack-plugin": "^5.0.3",
+    "terser-webpack-plugin": "^2.3.2",
+    "webpack": "^4.41.5",
+    "webpack-cli": "^3.3.10",
+    "webpack-dev-server": "^3.10.1",
+    "webpack-merge": "^4.2.2"
+  },
+  "dependencies": {},
+  "author": "stephan.startsev@gmail.com",
+  "license": "MIT"
+}
