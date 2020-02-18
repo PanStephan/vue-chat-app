@@ -18,7 +18,8 @@ const prodWebpackConfig = merge.smart(baseWebpackConfig, {
           preset: ["default", { discardComments: { removeAll: true } }]
         }
       }),
-      new TerserWebpackPlugin()],
+      new TerserWebpackPlugin(),
+    ],
   },
   module: {
     rules: [],

@@ -1,5 +1,6 @@
 ## TODO: 
-  1. post-css, socket.io!!, vue, vuex, vue-router, eslint, babel-presets, normalize, prettier - webpack settings
+  1. post-css, socket.io!!, vue, vuex, vue-router, eslint, babel-presets, normalize, prettier - webpack
+  settings
 
   2. create markup
 
