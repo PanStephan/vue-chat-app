@@ -2,12 +2,18 @@
   --primary-color: #302AE6;
   --secondary-color: #536390;
   --font-color: #424242;
+  --font-color--warning: #be3c25; 
   --bg-color: #f7fcfb;
+  --border-color: #363d45;
+  --input-bg: #ffffff;
 }
 
 [data-theme="dark"] {
   --primary-color: #9A97F3;
   --secondary-color: #818cab;
   --font-color: #e1e1ff;
-  --bg-color: #161625;
+  --font-color--warning: #9e5649;
+  --bg-color: #1c1c2c;
+  --border-color: #7d8185;
+  --input-bg: #303439;
 }

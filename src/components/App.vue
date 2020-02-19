@@ -1,8 +1,6 @@
 <template>
-  <router-view/>
+  <router-view />
 </template>
-<script>
-</script>
+<script></script>
 
-<style lang="postcss">
-</style>
+<style lang="postcss"></style>

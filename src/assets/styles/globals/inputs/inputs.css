@@ -1,0 +1,22 @@
+.g-input {
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  height: 30px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 0;
+  padding-left: 10px;
+  font-size: var(--fz-mini);
+  background-color: var(--input-bg);
+  color: var(--font-color);
+}
+
+.g-input::placeholder {
+  font-size: var(--fz-mini);
+  color: var(--font-color);
+}
+
+.g-input--fluid {
+  width: 100%;
+}

@@ -2,5 +2,7 @@
 @import 'normalize.css';
 
 /* global styles */
-@import 'globals.css';
 @import 'themes.css';
+  /* globals use themes vars */
+@import 'globals';
+
