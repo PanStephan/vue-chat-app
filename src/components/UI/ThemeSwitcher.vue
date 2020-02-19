@@ -23,7 +23,7 @@ export default {
     }
   },
   methods: {
-                  switchTheme(e) {
+                   switchTheme(e) {
       if (e.target.checked) {
         document.documentElement.setAttribute('data-theme', 'dark')
         localStorage.setItem('theme', 'dark')

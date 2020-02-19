@@ -11,11 +11,7 @@
     "pre-commit": "lint-staged"
   },
   "lint-staged": {
-    "src/*.js": [
-      "npm run prettier",
-      "npm run lint"
-    ],
-    "src/*.vue": [
+    "src/*": [
       "npm run prettier",
       "npm run lint"
     ]
