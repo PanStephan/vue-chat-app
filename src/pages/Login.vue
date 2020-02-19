@@ -66,12 +66,11 @@ export default {
       this.form.errors = this.$v.form.$anyError
       // TODO: wait backend
       if (!this.$v.$invalid) {
-        
+
         setTimeout(() => {
           console.log(this.form.password)
           console.log(this.form.login)
         }, 1000)
-
         this.form.login = null
         this.form.password = null
         this.$v.$reset()
