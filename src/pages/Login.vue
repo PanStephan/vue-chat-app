@@ -36,7 +36,7 @@ import empty from '../layouts/Empty'
 import { required, minLength, email } from 'vuelidate/lib/validators'
 
 export default {
-  components: { empty },
+  components: { empty},
   data() {
     return {
       form: {

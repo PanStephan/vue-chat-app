@@ -11,7 +11,7 @@
     "pre-commit": "lint-staged"
   },
   "lint-staged": {
-    "src/*": [
+    "src/**/*": [
       "npm run prettier",
       "npm run lint"
     ]
