@@ -5,4 +5,9 @@ module.exports = {
   bracketSpacing: true,
   tabWidth: 2,
   semi: false,
+  extends: [
+    "plugin:vue/essential",
+    "plugin:prettier/recommended",
+    "eslint:recommended"
+  ]
 }
