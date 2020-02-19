@@ -3,26 +3,28 @@
     <div class="login-wrapper">
       <form class="login-form" @submit.prevent="onSubmit">
         <div class="login-form__item">
-          <div class="login-form__error" v-if="!$v.form.login.email"> Email is not correct!</div>
-          <div class="login-form__error" v-else-if="form.errors"> Filed is required! </div>
+          <div v-if="!$v.form.login.email">Email is not correct! class="login-form__error"></div>
+          <div v-else-if="form.errors" class="login-form__error">Filed is required!></div>
           <label for="login" class="login-form__label">Login</label>
           <input
-            id="login"          
+            id="login"
+            v-model.trim="$v.form.login.$model"
             class="g-input g-input--fluid"
             placeholder="type login"
-            v-model.trim="$v.form.login.$model"
           />
         </div>
         <div class="login-form__item">
-          <div class="login-form__error" v-if="!$v.form.password.minLength">Password must have at least {{ $v.form.password.$params.minLength.min }} letters.</div>
-          <div class="login-form__error" v-else-if="form.errors">Password is required.</div>
+          <div v-if="!$v.form.password.minLength" class="login-form__error">
+            Password must have at least {{ $v.form.password.$params.minLength.min }} letters.
+          </div>
+          <div v-else-if="form.errors" class="login-form__error">Password is required.</div>
           <label for="password" class="login-form__label">Password</label>
           <input
             id="password"
+            v-model.trim="$v.form.password.$model"
             type="password"
             class="g-input g-input--fluid"
             placeholder="type password"
-            v-model.trim="$v.form.password.$model"
           />
         </div>
         <button type="submit" class="g-button login-form__btn g-button--fluid">Submit</button>
@@ -36,37 +38,36 @@ import empty from '../layouts/Empty'
 import { required, minLength, email } from 'vuelidate/lib/validators'
 
 export default {
-  components: { empty},
+  components: { empty },
   data() {
     return {
       form: {
         password: '',
         login: '',
         errors: false,
-      }
+      },
     }
   },
   validations: {
     form: {
       login: {
         email,
-        required
+        required,
       },
       password: {
         minLength: minLength(5),
-        required
-      }
-    }
+        required,
+      },
+    },
   },
   methods: {
     onSubmit() {
-      // always on top, vuelidate init 
+      // always on top, vuelidate init
       this.$v.$touch()
 
       this.form.errors = this.$v.form.$anyError
       // TODO: wait backend
       if (!this.$v.$invalid) {
-
         setTimeout(() => {
           console.log(this.form.password)
           console.log(this.form.login)
