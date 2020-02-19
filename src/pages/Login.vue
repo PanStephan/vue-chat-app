@@ -63,7 +63,7 @@ export default {
       // always on top, vuelidate init 
       this.$v.$touch()
 
-      this.form.errors = this.$v.form.$anyError;
+      this.form.errors = this.$v.form.$anyError
       // TODO: wait backend
       if (!this.$v.$invalid) {
         setTimeout(() => {
