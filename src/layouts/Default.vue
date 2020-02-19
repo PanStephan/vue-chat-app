@@ -1,10 +1,5 @@
-<template>
+<template><div></div></template>
 
-</template>
+<script></script>
 
-<script>
-</script>
-
-<style lang="postcss">
-
-</style>
+<style lang="postcss"></style>

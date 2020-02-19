@@ -3,6 +3,7 @@
 }
 
 html, body {
+  background-color: var(--bg-color);
   font-family: 'Roboto Reg', Helvetica, Arial, sans-serif;
 }
 

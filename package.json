@@ -6,8 +6,8 @@
   "scripts": {
     "build": "cross-env NODE_ENV=production webpack --config webpack.config.prod.js",
     "serve": "cross-env NODE_ENV=development webpack-dev-server --config webpack.config.dev.js --watch",
-    "prettier": "prettier --write \"src/**/*.js\"",
-    "lint": "eslint \"src/**/*.js\"",
+    "prettier": "prettier --write \"src/**/*.js\" && prettier --write \"src/**/*.vue\"",
+    "lint": "eslint \"src/**/*.js\" && eslint \"src/**/*.vue\"",
     "pre-commit": "lint-staged"
   },
   "lint-staged": {
@@ -75,6 +75,7 @@
   "dependencies": {
     "vue": "^2.6.11",
     "vue-router": "^3.1.5",
+    "vuelidate": "^0.7.5",
     "vuex": "^3.1.2"
   },
   "author": "stephan.startsev@gmail.com",
