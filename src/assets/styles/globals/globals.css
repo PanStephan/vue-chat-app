@@ -1,0 +1,41 @@
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  font-family: 'Roboto Reg', Helvetica, Arial, sans-serif;
+}
+
+@font-face {
+  font-family: 'Roboto Bold';
+  src: url('../fonts/RobotoMono-Medium.eot');
+  src: url('../fonts/RobotoMono-Medium.eot?#iefix') format('embedded-opentype'),
+  url('../fonts/RobotoMono-Medium.woff') format('woff'),
+  url('../fonts/RobotoMono-Medium.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Roboto Reg';
+  src: url('../fonts/RobotoMono-Regular.eot');
+  src: url('../fonts/RobotoMono-Regular.eot?#iefix') format('embedded-opentype'),
+  url('../fonts/RobotoMono-Regular.woff') format('woff'),
+  url('../fonts/RobotoMono-Regular.ttf') format('truetype');
+}
+
+.g-container {
+  width: 1100px;
+  margin: 0 auto;
+}
+
+@media (max-width: 1200px) {
+  .g-container {
+    width: 750px;
+  }
+}
+
+@media (max-width: 768px) {
+  .g-container {
+    width: 580px;
+    width: 90%;
+  }
+}

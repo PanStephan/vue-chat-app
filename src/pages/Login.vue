@@ -1,21 +1,37 @@
 <template>
   <empty>
-    <themeSwitcher/>
-    <form class="login-">
-      <input type="text">
-    </form>
+    <div class="login-wrapper">
+      <form class="login-form">
+        <div class="login-form">
+          <div class="login-form__item">
+            <label for="login"></label>
+            <input type="text" id="login">
+          </div>
+          <div class="login-form__item">
+            <label for="password"></label>
+            <input type="text" id="password">
+          </div>
+        </div>
+      </form>
+    </div>
   </empty>
 </template>
 
 <script>
 import empty from '../layouts/Empty'
-import themeSwitcher from '../components/UI/ThemeSwitcher'
 
 export default {
-  components: {empty, themeSwitcher}
+  components: {empty}
 }
 </script>
 
-<style>
-
+<style lang="postcss">
+.login-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.login-form {
+  
+}
 </style>
