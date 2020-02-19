@@ -31,7 +31,8 @@ export default {
       else {
         document.documentElement.setAttribute('data-theme', 'light')
         localStorage.setItem('theme', 'light')
-      }    
+      }
+      
     }
   }
 }
