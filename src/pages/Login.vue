@@ -3,8 +3,8 @@
     <div class="login-wrapper">
       <form class="login-form" @submit.prevent="onSubmit">
         <div class="login-form__item">
-          <div v-if="!$v.form.login.email">Email is not correct! class="login-form__error"></div>
-          <div v-else-if="form.errors" class="login-form__error">Filed is required!></div>
+          <div v-if="!$v.form.login.email" class="login-form__error">Email is not correct!</div>
+          <div v-else-if="form.errors" class="login-form__error">Filed is required!</div>
           <label for="login" class="login-form__label">Login</label>
           <input
             id="login"
@@ -15,9 +15,9 @@
         </div>
         <div class="login-form__item">
           <div v-if="!$v.form.password.minLength" class="login-form__error">
-            Password must have at least {{ $v.form.password.$params.minLength.min }} letters.
+            Password must have at least {{ $v.form.password.$params.minLength.min }} letters
           </div>
-          <div v-else-if="form.errors" class="login-form__error">Password is required.</div>
+          <div v-else-if="form.errors" class="login-form__error">Password is required</div>
           <label for="password" class="login-form__label">Password</label>
           <input
             id="password"

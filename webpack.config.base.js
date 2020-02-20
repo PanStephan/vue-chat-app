@@ -35,6 +35,10 @@ module.exports = {
         use: [
           {
             loader: 'file-loader',
+            options: {
+              esModule: false,
+              name: `images/[name].[ext]`,
+            },
           },
         ],
       },
@@ -46,7 +50,7 @@ module.exports = {
             loader: MiniCssExtractPlugin.loader,
           },
           {
-            loader: 'css-loader',
+            loader: 'css-loader', 
             options: { importLoaders: 1 },
           },
           {
@@ -71,6 +75,7 @@ module.exports = {
         test: /\.vue$/,
         use: {
           loader: 'vue-loader',
+          options: {}
         } 
       },
     ],
