@@ -5,10 +5,11 @@
   "private": true,
   "scripts": {
     "build": "cross-env NODE_ENV=production webpack --config webpack.config.prod.js",
-    "serve": "cross-env NODE_ENV=development webpack-dev-server --config webpack.config.dev.js --watch",
+    "dev": "cross-env NODE_ENV=development webpack-dev-server --config webpack.config.dev.js --watch",
     "prettier": "prettier --write \"src/**/*.js\" && prettier --write \"src/**/*.vue\"",
     "lint": "eslint \"src/**/*.js\" && eslint \"src/**/*.vue\"",
-    "pre-commit": "lint-staged"
+    "pre-commit": "lint-staged",
+    "serve": "nodemon src/server/app.js"
   },
   "lint-staged": {
     "src/**/*.js": [
@@ -55,6 +56,7 @@
     "lint-staged": "^10.0.7",
     "mini-css-extract-plugin": "^0.9.0",
     "node-sass": "^4.13.1",
+    "nodemon": "^2.0.2",
     "normalize.css": "^8.0.1",
     "npm-run-all": "^4.1.5",
     "optimize-css-assets-webpack-plugin": "^5.0.3",
@@ -76,6 +78,9 @@
     "webpack-merge": "^4.2.2"
   },
   "dependencies": {
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "mongoose": "^5.9.1",
     "vue": "^2.6.11",
     "vue-router": "^3.1.5",
     "vuelidate": "^0.7.5",

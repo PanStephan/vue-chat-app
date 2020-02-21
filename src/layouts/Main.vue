@@ -45,9 +45,13 @@ export default {
   margin-right: 15px;
 }
 .main-footer {
+  position: fixed;
+  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
   height: 55px;
+  left: 0;
+  bottom: 0;
 }
 </style>
