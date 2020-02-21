@@ -9,17 +9,7 @@ const devWebpackConfig = merge.smart(baseWebpackConfig, {
     hot: true,
   },
   module: {
-    rules: [
-      {
-        test: /\.vue$/,
-        use: {
-          loader: 'vue-loader',
-          options: {
-            hotReload: true
-          }
-        } 
-      },
-    ],
+    rules: [],
   },
   plugins: [],
 })

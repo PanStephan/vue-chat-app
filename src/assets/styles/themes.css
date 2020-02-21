@@ -3,9 +3,10 @@
   --secondary-color: #536390;
   --font-color: #424242;
   --font-color--warning: #be3c25; 
-  --bg-color: #f7fcfb;
+  --bg-color: #f1f1f1;
   --border-color: #363d45;
   --input-bg: #ffffff;
+  --bg-message-color: #ffffff;
 }
 
 [data-theme="dark"] {
@@ -16,4 +17,5 @@
   --bg-color: #1c1c2c;
   --border-color: #7d8185;
   --input-bg: #303439;
+  --bg-message-color: #3a3a64;
 }
