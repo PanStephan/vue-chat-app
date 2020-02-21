@@ -6,7 +6,9 @@
           <div v-if="!$v.loginForm.login.email" class="entrance-form__error">
             Email is not correct!
           </div>
-          <div v-else-if="loginForm.errors" class="entrance-form__error">Filed is required!</div>
+          <div v-else-if="loginForm.errors.login" class="entrance-form__error">
+            Filed is required!
+          </div>
           <label for="login" class="entrance-form__label">Login</label>
           <input
             id="login"
@@ -19,7 +21,9 @@
           <div v-if="!$v.loginForm.password.minLength" class="entrance-form__error">
             Password must have at least {{ $v.loginForm.password.$params.minLength.min }} letters
           </div>
-          <div v-else-if="loginForm.errors" class="entrance-form__error">Password is required</div>
+          <div v-else-if="loginForm.errors.password" class="entrance-form__error">
+            Password is required
+          </div>
           <label for="login-password" class="entrance-form__label">Password</label>
           <input
             id="login-password"
@@ -30,7 +34,7 @@
           />
         </div>
         <button type="submit" class="g-button entrance-form__btn g-button--fluid">Submit</button>
-        <span @click="isAcc = false">Create Account</span>
+        <span @click="isAcc = false" class="entrance-form__switch">Create Account</span>
       </form>
       <!-- sign up form -->
       <form v-show="!isAcc" class="entrance-form" @submit.prevent="onSignUp">
@@ -38,8 +42,10 @@
           <div class="entrance-form__error" v-if="!$v.signUpForm.email.email">
             Email is not correct!
           </div>
-          <div class="entrance-form__error" v-else-if="signUpForm.errors">Filed is required!</div>
-          <label for="email" class="entrance-form__label">Email:</label>
+          <div class="entrance-form__error" v-else-if="signUpForm.errors.email">
+            Filed is required!
+          </div>
+          <label for="email" class="entrance-form__label">Email</label>
           <input
             v-model="signUpForm.email"
             id="email"
@@ -51,11 +57,15 @@
           <div class="entrance-form__error" v-if="!$v.signUpForm.password.minLength">
             Password must have at least {{ $v.signUpForm.password.$params.minLength.min }} letters.
           </div>
-          <div class="entrance-form__error" v-else-if="signUpForm.errors">
+          <div class="entrance-form__error" v-else-if="signUpForm.errors.password">
             Password is required.
           </div>
           <label class="entrance-form__label" id="signUpForm-password">Password</label>
-          <input class="g-input g-input--fluid" v-model.trim="$v.signUpForm.password.$model" />
+          <input
+            class="g-input g-input--fluid"
+            v-model.trim="$v.signUpForm.password.$model"
+            placeholder="type password"
+          />
         </div>
         <div class="entrance-form__item">
           <div class="entrance-form__error" v-if="!$v.signUpForm.repeatPassword.sameAsPassword">
@@ -65,9 +75,11 @@
           <input
             class="g-input g-input--fluid"
             v-model.trim="$v.signUpForm.repeatPassword.$model"
+            placeholder="repeat password"
           />
         </div>
         <button type="submit" class="g-button entrance-form__btn g-button--fluid">Submit!</button>
+        <span @click="isAcc = true" class="entrance-form__switch">Log in</span>
       </form>
     </div>
   </empty>
@@ -84,13 +96,19 @@ export default {
       loginForm: {
         password: null,
         login: null,
-        errors: false,
+        errors: {
+          login: false,
+          password: false,
+        },
       },
       signUpForm: {
         email: null,
         password: null,
         repeatPassword: null,
-        errors: false,
+        errors: {
+          email: false,
+          password: false,
+        },
       },
       isAcc: true,
     }
@@ -125,7 +143,9 @@ export default {
       // always on top, vuelidate init
       this.$v.loginForm.$touch()
 
-      this.loginForm.errors = this.$v.loginForm.$anyError
+      this.loginForm.errors.login = this.$v.loginForm.login.$anyError
+      this.loginForm.errors.password = this.$v.loginForm.password.$anyError
+
       // TODO: wait backend
       if (!this.$v.loginForm.$invalid) {
         setTimeout(() => {
@@ -141,7 +161,8 @@ export default {
       // always on top, vuelidate init
       this.$v.signUpForm.$touch()
 
-      this.signUpForm.errors = this.$v.signUpForm.$anyError
+      this.signUpForm.errors.login = this.$v.signUpForm.login.$anyError
+      this.signUpForm.errors.password = this.$v.signUpForm.password.$anyError
       // TODO: wait backend
       if (!this.$v.signUpForm.$invalid) {
         setTimeout(() => {
@@ -187,5 +208,13 @@ export default {
 }
 .entrance-form__btn {
   margin-top: 25px;
+  margin-bottom: 10px;
+}
+.entrance-form__switch {
+  margin-top: 10px;
+  font-size: 13px;
+  color: var(--font-color);
+  text-decoration: underline;
+  cursor: pointer;
 }
 </style>
