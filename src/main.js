@@ -1,4 +1,4 @@
-// load global styles before vue styles!
+// load global styles before vue styles
 import './assets/styles/styles.css'
 
 import Vue from 'vue'

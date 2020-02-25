@@ -1,7 +1,7 @@
 <template>
   <empty>
     <div class="form-wrapper">
-      <form class="entrance-form" @submit.prevent="onLoginSubmit" v-show="isAcc">
+      <form class="entrance-form" v-show="isAcc" @submit.prevent="onLoginSubmit">
         <div class="entrance-form__item">
           <div v-if="!$v.loginForm.login.email" class="entrance-form__error">
             Email is not correct!
@@ -34,15 +34,15 @@
           />
         </div>
         <button type="submit" class="g-button entrance-form__btn g-button--fluid">Submit</button>
-        <span @click="isAcc = false" class="entrance-form__switch">Create Account</span>
+        <span class="entrance-form__switch" @click="isAcc = false">Create Account</span>
       </form>
       <!-- sign up form -->
       <form v-show="!isAcc" class="entrance-form" @submit.prevent="onSignUp">
         <div class="entrance-form__item">
-          <div class="entrance-form__error" v-if="!$v.signUpForm.email.email">
+          <div v-if="!$v.signUpForm.email.email" class="entrance-form__error">
             Email is not correct!
           </div>
-          <div class="entrance-form__error" v-else-if="signUpForm.errors.email">
+          <div v-else-if="signUpForm.errors.email" class="entrance-form__error">
             Filed is required!
           </div>
           <label for="email" class="entrance-form__label">Email</label>
@@ -54,40 +54,44 @@
           />
         </div>
         <div class="entrance-form__item">
-          <div class="entrance-form__error" v-if="!$v.signUpForm.password.minLength">
+          <div v-if="!$v.signUpForm.password.minLength" class="entrance-form__error">
             Password must have at least {{ $v.signUpForm.password.$params.minLength.min }} letters.
           </div>
-          <div class="entrance-form__error" v-else-if="signUpForm.errors.password">
+          <div v-else-if="signUpForm.errors.password" class="entrance-form__error">
             Password is required.
           </div>
           <label class="entrance-form__label" id="signUpForm-password">Password</label>
           <input
-            class="g-input g-input--fluid"
+            type="password"
             v-model.trim="$v.signUpForm.password.$model"
+            class="g-input g-input--fluid"
             placeholder="type password"
           />
         </div>
         <div class="entrance-form__item">
-          <div class="entrance-form__error" v-if="!$v.signUpForm.repeatPassword.sameAsPassword">
+          <div v-if="!$v.signUpForm.repeatPassword.sameAsPassword" class="entrance-form__error">
             Passwords must be identical.
           </div>
           <label class="entrance-form__label">Repeat password</label>
           <input
+            type="password"
             class="g-input g-input--fluid"
             v-model.trim="$v.signUpForm.repeatPassword.$model"
             placeholder="repeat password"
           />
         </div>
         <button type="submit" class="g-button entrance-form__btn g-button--fluid">Submit!</button>
-        <span @click="isAcc = true" class="entrance-form__switch">Log in</span>
+        <span class="entrance-form__switch" @click="isAcc = true">Log in</span>
       </form>
     </div>
   </empty>
 </template>
 
 <script>
-import empty from '../layouts/Empty'
 import { required, minLength, email, sameAs } from 'vuelidate/lib/validators'
+import axios from 'axios'
+
+import empty from '../layouts/Empty'
 
 export default {
   components: { empty },
@@ -148,31 +152,39 @@ export default {
 
       // TODO: wait backend
       if (!this.$v.loginForm.$invalid) {
-        setTimeout(() => {
-          console.log(this.loginForm.password)
-          console.log(this.loginForm.login)
-          this.$v.loginForm.$reset()
-          this.loginForm.login = null
-          this.loginForm.password = null
-        }, 1000)
+        const data = {
+          login: this.loginForm.login,
+          password: this.loginForm.password,
+        }
+
+        const token = axios.post('/api/auth/sign_in', data)
+        console.log(token)
+
+        this.$v.loginForm.$reset()
+        this.loginForm.login = null
+        this.loginForm.password = null
       }
     },
     onSignUp() {
       // always on top, vuelidate init
       this.$v.signUpForm.$touch()
 
-      this.signUpForm.errors.login = this.$v.signUpForm.login.$anyError
+      this.signUpForm.errors.email = this.$v.signUpForm.email.$anyError
       this.signUpForm.errors.password = this.$v.signUpForm.password.$anyError
       // TODO: wait backend
       if (!this.$v.signUpForm.$invalid) {
-        setTimeout(() => {
-          console.log(this.signUpForm.password)
-          console.log(this.signUpForm.email)
-          this.$v.signUpForm.$reset()
-          this.signUpForm.email = null
-          this.signUpForm.password = null
-          this.signUpForm.repeatPassword = null
-        }, 1000)
+        const data = {
+          login: this.signUpForm.email,
+          password: this.signUpForm.password,
+        }
+
+        axios.post('/api/auth/sign_up', data)
+
+        this.$v.signUpForm.$reset()
+        this.signUpForm.email = null
+        this.signUpForm.password = null
+        this.signUpForm.repeatPassword = null
+        this.isAcc = true
       }
     },
   },

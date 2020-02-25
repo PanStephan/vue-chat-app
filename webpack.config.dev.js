@@ -7,6 +7,9 @@ const devWebpackConfig = merge.smart(baseWebpackConfig, {
   devServer: {
     port: 8080,
     hot: true,
+    proxy: {
+      '/api/*': 'http://localhost:3000'
+    }
   },
   module: {
     rules: [],

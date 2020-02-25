@@ -19,7 +19,7 @@
 </template>
 
 <script>
-import settings from '../components/UI/Settings'
+import settings from '../components/Settings'
 import profile from '../components/UI/Profile'
 
 export default {
@@ -53,5 +53,8 @@ export default {
   height: 55px;
   left: 0;
   bottom: 0;
+}
+.main-footer__title {
+  color: var(--fz-color);
 }
 </style>

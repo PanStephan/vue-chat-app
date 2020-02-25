@@ -1,8 +1,7 @@
 <template>
   <div class="settings">
     <button class="settings__btn" @click="settingsModal = !settingsModal"></button>
-    <modal title="Modal with form" v-show="settingsModal" @close="settingsModal = false">
-      <!-- body -->
+    <modal v-show="settingsModal" title="Modal with form" @close="settingsModal = false">
       <div slot="body">
         <themeSwitcher />
       </div>
@@ -11,8 +10,8 @@
 </template>
 
 <script>
-import themeSwitcher from './ThemeSwitcher'
-import modal from './Modal'
+import themeSwitcher from './UI/ThemeSwitcher'
+import modal from './UI/Modal'
 
 export default {
   components: { themeSwitcher, modal },
@@ -27,11 +26,11 @@ export default {
 <style lang="postcss">
 .settings__btn {
   display: inline-block;
-  background-image: url('../../assets/images/settings.png');
+  background-image: url('../assets/images/settings.png');
   background-size: contain;
   width: 30px;
   height: 30px;
-  border: none;
+  border: 0;
   background-color: transparent;
 }
 </style>
