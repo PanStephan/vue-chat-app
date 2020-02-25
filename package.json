@@ -9,7 +9,8 @@
     "prettier": "prettier --write \"src/**/*.js\" && prettier --write \"src/**/*.vue\"",
     "lint": "eslint \"src/**/*.js\" && eslint \"src/**/*.vue\"",
     "pre-commit": "lint-staged",
-    "serve": "nodemon src/server/app.js"
+    "serve": "cross-env NODE_ENV=development nodemon src/server/app.js",
+    "start": "npm-run-all -p dev serve"
   },
   "lint-staged": {
     "src/**/*.js": [
@@ -78,9 +79,15 @@
     "webpack-merge": "^4.2.2"
   },
   "dependencies": {
+    "axios": "^0.19.2",
+    "bcrypt-nodejs": "^0.0.3",
     "body-parser": "^1.19.0",
     "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.9.1",
+    "passport": "^0.4.1",
+    "passport-jwt": "^4.0.0",
+    "passport-strategy": "^1.0.0",
     "vue": "^2.6.11",
     "vue-router": "^3.1.5",
     "vuelidate": "^0.7.5",

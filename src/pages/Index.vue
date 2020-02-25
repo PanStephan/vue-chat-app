@@ -3,7 +3,7 @@
     <div class="main-page__wrapper">
       <aside class="menu">
         <ul class="menu__list" @click="openAside">
-          <li class="menu__item" v-for="menu in 5" :key="menu">
+          <li v-for="menu in 5" :key="menu" class="menu__item">
             <a href="" class="menu__link">menu-item</a>
           </li>
         </ul>
@@ -11,7 +11,7 @@
       <section class="all-chats">
         <input type="text" class="all-chats__search g-input--fluid" placeholder="Search..." />
         <ul class="all-chats__list">
-          <li class="all-chats__item" v-for="chats in 5" :key="chats">
+          <li v-for="chats in 5" :key="chats" class="all-chats__item">
             <!-- TODO: img alt -->
             <img src="../assets/images/settings.png" alt="" class="all-chats__img" />
             <div class="all-chats__body all-chats-body">
