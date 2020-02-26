@@ -11,6 +11,10 @@ const userSchema = new Schema({
     required: true,
     minLength: 5,
   },
+  profile: {
+    type: Object,
+    require: true,
+  },
 })
 
 module.exports = model('users', userSchema)

@@ -13,9 +13,9 @@ const prodWebpackConfig = merge.smart(baseWebpackConfig, {
     },
     minimizer: [
       new OptimizeCssAssetWebpackPlugin({
-        cssProcessor: require("cssnano"),
+        cssProcessor: require('cssnano'),
         cssProcessorPluginOptions: {
-          preset: ["default", { discardComments: { removeAll: true } }]
+          preset: ['default', { discardComments: { removeAll: true } }]
         }
       }),
       new TerserWebpackPlugin(),
