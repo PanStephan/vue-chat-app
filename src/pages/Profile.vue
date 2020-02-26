@@ -39,9 +39,19 @@
 </template>
 
 <script>
+import axios from 'axios'
+
 import mainPage from '../layouts/Main'
 export default {
   components: { mainPage },
+  async mounted() {
+    try {
+      const profile = await axios.post('/api/profile/info', this.$route.params.id)
+      console.log(profile)
+    } catch (e) {
+      console.log(e)
+    }
+  },
   methods: {
     openAside() {},
   },

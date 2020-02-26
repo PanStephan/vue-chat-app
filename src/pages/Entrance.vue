@@ -143,29 +143,32 @@ export default {
     },
   },
   methods: {
-    onLoginSubmit() {
+    async onLoginSubmit() {
       // always on top, vuelidate init
       this.$v.loginForm.$touch()
 
       this.loginForm.errors.login = this.$v.loginForm.login.$anyError
       this.loginForm.errors.password = this.$v.loginForm.password.$anyError
 
-      // TODO: wait backend
       if (!this.$v.loginForm.$invalid) {
         const data = {
           login: this.loginForm.login,
           password: this.loginForm.password,
         }
 
-        const token = axios.post('/api/auth/sign_in', data)
-        console.log(token)
-
-        this.$v.loginForm.$reset()
-        this.loginForm.login = null
-        this.loginForm.password = null
+        try {
+          await this.$store.dispatch('signIn', data)
+          this.$router.push(`/profile/${this.$store.getters.getId}`)
+          this.$v.loginForm.$reset()
+          this.loginForm.login = null
+          this.loginForm.password = null
+        } catch (e) {
+          // TODO: msg about err
+          console.log(e)
+        }
       }
     },
-    onSignUp() {
+    async onSignUp() {
       // always on top, vuelidate init
       this.$v.signUpForm.$touch()
 
@@ -178,13 +181,17 @@ export default {
           password: this.signUpForm.password,
         }
 
-        axios.post('/api/auth/sign_up', data)
-
-        this.$v.signUpForm.$reset()
-        this.signUpForm.email = null
-        this.signUpForm.password = null
-        this.signUpForm.repeatPassword = null
-        this.isAcc = true
+        try {
+          await this.$store.dispatch('signUp', data)
+          this.$v.signUpForm.$reset()
+          this.signUpForm.email = null
+          this.signUpForm.password = null
+          this.signUpForm.repeatPassword = null
+          this.isAcc = true
+        } catch (e) {
+          // TODO: msg about err
+          console.log(e)
+        }
       }
     },
   },

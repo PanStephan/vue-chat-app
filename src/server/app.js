@@ -5,6 +5,7 @@ const passport = require('passport')
 const passportStrategy = require('./middleware/passport-strategy')
 
 const authRouters = require('./routers/auth.routers')
+const profileRouters = require('./routers/profile.routers')
 const keys = require('./keys')
 
 const app = express()
@@ -26,6 +27,7 @@ app.use(bodyParser.json())
 
 // routers
 app.use('/api/auth', authRouters)
+app.use('/api/profile', profileRouters)
 
 const port = process.env.PORT || 3000
 

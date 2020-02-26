@@ -19,7 +19,7 @@ module.exports.signIn = async (req, res) => {
           keys.JWT,
           { expiresIn: 60 * 60 },
         )
-        res.json({ token })
+        res.json({ token, id: candidate._id, profile: candidate.profile })
       } else {
         res.status(401).json({ message: 'Пароль неверен' })
       }
@@ -37,11 +37,11 @@ module.exports.signUp = async (req, res) => {
     if (candidate) {
       res.status(409).json({ message: 'Такой login уже занят' })
     } else {
-      console.log(req.body)
       const salt = bcrypt.genSaltSync(10)
       const user = new User({
         login: req.body.login,
         password: bcrypt.hashSync(req.body.password, salt),
+        profile: {},
       })
 
       await user.save()
