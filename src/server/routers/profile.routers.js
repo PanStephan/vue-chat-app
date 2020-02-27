@@ -1,12 +1,12 @@
 const { Router } = require('express')
 const { getProfileData } = require('../controllers/profile.controller')
-const passport = require('passport')
+// const passport = require('passport')
 
 const router = Router()
 
 // /api/profile
 // passport.authenticate('jwt', {session: false})
-router.post('/info', getProfileData)
+router.get('/info/:id', getProfileData)
 
 // router.post('/sign_up', passport.authenticate('jwt', {session: false}), signUp)
 

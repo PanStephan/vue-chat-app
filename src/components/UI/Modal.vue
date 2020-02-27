@@ -38,7 +38,6 @@ export default {
 </script>
 
 <style lang="postcss">
-// Animation
 .modal-enter {
   opacity: 0;
 }
@@ -47,9 +46,8 @@ export default {
 }
 .modal-enter .modal-content,
 .modal-leave-active .modal-content {
-  transform: scale(1.2);
+  transform: scale(1.1);
 }
-
 .modal__wrapper {
   display: flex;
   justify-content: center;
@@ -63,7 +61,6 @@ export default {
   z-index: 998;
   background-color: rgba(00, 00, 00, 0.48);
 }
-
 .modal-content {
   position: relative;
   max-width: 600px;
@@ -74,9 +71,6 @@ export default {
   border-radius: 8px;
   z-index: 999;
   overflow: hidden;
-  @media screen and (min-width: 900px) {
-    min-width: 500px;
-  }
 }
 .modal-header {
   display: flex;
@@ -87,11 +81,9 @@ export default {
 .modal-header > span {
   font-size: 24px;
 }
-
 .modal-header > .button-close {
   cursor: pointer;
 }
-
 .modal-body {
   text-align: center;
 }
