@@ -2,13 +2,18 @@
   <mainPage>
     <div class="main-page__wrapper">
       <aside class="menu">
-        <ul class="menu__list" @click="openAside">
+        <burgerMenu />
+        <ul class="menu__list">
           <li v-for="menu in 5" :key="menu" class="menu__item">
             <a href="" class="menu__link">menu-item</a>
           </li>
         </ul>
       </aside>
       <section class="all-chats">
+        <div class="all-chats__loader">
+          <loader v-if="pending" />
+          <div v-else>{{ profile.login }}</div>
+        </div>
         <input type="text" class="all-chats__search g-input--fluid" placeholder="Search..." />
         <ul class="all-chats__list">
           <li v-for="chats in 5" :key="chats" class="all-chats__item">
@@ -42,18 +47,33 @@
 import axios from 'axios'
 
 import mainPage from '../layouts/Main'
+import burgerMenu from '../components/UI/BurgerMenu'
+import loader from '../components/UI/Loader'
+
 export default {
-  components: { mainPage },
+  components: { mainPage, burgerMenu, loader },
+  // TODO errors baundle
+  data() {
+    return {
+      profile: null,
+      pending: true,
+      isAsideOpen: false,
+    }
+  },
   async mounted() {
+    this.pending = true
     try {
-      const profile = await axios.post('/api/profile/info', this.$route.params.id)
-      console.log(profile)
+      const { data } = await axios.get(`/api/profile/info/${this.$route.params.id}`)
+      this.pending = false
+      this.profile = data
     } catch (e) {
       console.log(e)
     }
   },
   methods: {
-    openAside() {},
+    openAside() {
+      this.isAsideOpen = !this.isAsideOpen
+    },
   },
 }
 </script>
@@ -148,5 +168,9 @@ export default {
 .menu__link {
   display: inline-block;
   margin-left: 10px;
+}
+.all-chats__loader {
+  display: flex;
+  justify-content: center;
 }
 </style>

@@ -24,13 +24,16 @@ export default {
         console.log(e)
       }
     },
-    async signUp({}, data) { // eslint-disable-line
+    // dont wrap comment
+    // prettier-ignore
+    async signUp({}, data) {  // eslint-disable-line  
+    // prettier-enable
       try {
         await axios.post('/api/auth/sign_up', data)
       } catch (e) {
         console.log(e)
       }
-    },
+    }
   },
   getters: {
     getToken(state) {

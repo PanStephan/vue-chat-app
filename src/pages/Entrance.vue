@@ -1,7 +1,7 @@
 <template>
   <empty>
     <div class="form-wrapper">
-      <form class="entrance-form" v-show="isAcc" @submit.prevent="onLoginSubmit">
+      <form v-show="isAcc" class="entrance-form" @submit.prevent="onLoginSubmit">
         <div class="entrance-form__item">
           <div v-if="!$v.loginForm.login.email" class="entrance-form__error">
             Email is not correct!
@@ -47,8 +47,8 @@
           </div>
           <label for="email" class="entrance-form__label">Email</label>
           <input
-            v-model="signUpForm.email"
             id="email"
+            v-model="signUpForm.email"
             class="g-input g-input--fluid"
             placeholder="type email"
           />
@@ -60,10 +60,10 @@
           <div v-else-if="signUpForm.errors.password" class="entrance-form__error">
             Password is required.
           </div>
-          <label class="entrance-form__label" id="signUpForm-password">Password</label>
+          <label id="signUpForm-password" class="entrance-form__label">Password</label>
           <input
-            type="password"
             v-model.trim="$v.signUpForm.password.$model"
+            type="password"
             class="g-input g-input--fluid"
             placeholder="type password"
           />
@@ -74,9 +74,9 @@
           </div>
           <label class="entrance-form__label">Repeat password</label>
           <input
+            v-model.trim="$v.signUpForm.repeatPassword.$model"
             type="password"
             class="g-input g-input--fluid"
-            v-model.trim="$v.signUpForm.repeatPassword.$model"
             placeholder="repeat password"
           />
         </div>
@@ -89,10 +89,8 @@
 
 <script>
 import { required, minLength, email, sameAs } from 'vuelidate/lib/validators'
-import axios from 'axios'
 
 import empty from '../layouts/Empty'
-
 export default {
   components: { empty },
   data() {
