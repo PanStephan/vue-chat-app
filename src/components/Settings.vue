@@ -4,6 +4,7 @@
     <modal v-show="settingsModal" title="Modal with form" @close="settingsModal = false">
       <div slot="body">
         <themeSwitcher />
+        <imgUploader />
       </div>
     </modal>
   </div>
@@ -12,9 +13,10 @@
 <script>
 import themeSwitcher from './UI/ThemeSwitcher'
 import modal from './UI/Modal'
+import imgUploader from './ImgUploader'
 
 export default {
-  components: { themeSwitcher, modal },
+  components: { themeSwitcher, modal, imgUploader },
   data() {
     return {
       settingsModal: false,

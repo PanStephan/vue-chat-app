@@ -36,9 +36,9 @@
           </li>
         </ul>
       </section>
-      <section class="chat">
-        section
-      </section>
+      <div class="menu__right">
+        <chat />
+      </div>
     </div>
   </mainPage>
 </template>
@@ -49,9 +49,10 @@ import axios from 'axios'
 import mainPage from '../layouts/Main'
 import burgerMenu from '../components/UI/BurgerMenu'
 import loader from '../components/UI/Loader'
+import chat from '../components/Chat'
 
 export default {
-  components: { mainPage, burgerMenu, loader },
+  components: { mainPage, burgerMenu, loader, chat },
   // TODO errors baundle
   data() {
     return {
@@ -143,7 +144,7 @@ export default {
   color: var(--font-color);
   margin-top: 5px;
 }
-.chat {
+.menu__right {
   margin-left: 25px;
 }
 .menu {
