@@ -3,7 +3,7 @@
     <!-- TODO: acc,  style -->
     <input type="file" id="img-loader" @change="uploadFile" class="img-loader__input" />
     <label for="img-loader" class="g-input g-input--fluid img-loader__label img-loader-label">
-      <span class="img-loader-label__text">Choose a file</span>
+      <span class="img-loader-label__text">Choose a file {{ fileName ? fileName : '' }}</span>
     </label>
   </div>
 </template>
@@ -13,13 +13,14 @@ export default {
   data() {
     return {
       image: null,
+      fileName: null,
     }
   },
   methods: {
     uploadFile(e) {
       const files = e.target.files || e.dataTransfer.files
       if (!files.length) return
-      console.log(files[0])
+      this.fileName = files[0].name
     },
   },
 }
