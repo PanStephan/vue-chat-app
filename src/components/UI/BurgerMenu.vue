@@ -1,5 +1,5 @@
 <template>
-  <div class="burger-container" @click="isOpen = !isOpen">
+  <div class="burger-container" @click="toggleBurger">
     <div :class="isOpen ? 'burger-icon open-burger' : 'burger-icon'"></div>
   </div>
 </template>
@@ -10,6 +10,12 @@ export default {
     return {
       isOpen: false,
     }
+  },
+  methods: {
+    toggleBurger() {
+      this.isOpen = !this.isOpen
+      this.$emit('toggleBurger', this.isOpen)
+    },
   },
 }
 </script>

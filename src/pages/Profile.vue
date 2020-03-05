@@ -2,8 +2,9 @@
   <mainPage>
     <div class="main-page__wrapper">
       <aside class="menu">
-        <burgerMenu />
-        <ul class="menu__list">
+        <burgerMenu @toggleBurger="toggleAside" />
+        <!-- TODO: add a styles -->
+        <ul :class="isAsideOpen ? 'menu__list' : 'menu__list menu__list--close'">
           <li v-for="menu in 5" :key="menu" class="menu__item">
             <a href="" class="menu__link">menu-item</a>
           </li>
@@ -72,8 +73,9 @@ export default {
     }
   },
   methods: {
-    openAside() {
-      this.isAsideOpen = !this.isAsideOpen
+    toggleAside(isOpen) {
+      this.isAsideOpen = isOpen
+      console.log(this.isAsideOpen)
     },
   },
 }
@@ -152,6 +154,9 @@ export default {
 }
 .menu__list {
   margin-top: 50px;
+}
+.menu__list--close {
+  width: 0;
 }
 .menu__item {
   height: 55px;
