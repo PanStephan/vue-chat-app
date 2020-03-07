@@ -14,7 +14,11 @@ const app = express()
 const server = http.createServer(app)
 const io = socketio(server)
 
-io.on('connect', () => {})
+io.on('connect', socket => {
+  socket.on('userMessage', msg => {
+    console.log(msg)
+  })
+})
 
 mongoose
   .connect(keys.MONGO_URI, {

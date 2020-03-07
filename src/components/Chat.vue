@@ -12,13 +12,16 @@
         <button type="submit" class="g-button g-form-button" @click="addMessage">Send</button>
       </form>
     </div>
+    <addConversation />
   </section>
 </template>
 
 <script>
 // import autoscroll from '../utils/autoscroll'
+import addConversation from './AddConversation'
 
 export default {
+  components: { addConversation },
   data() {
     return {
       userText: null,
@@ -28,7 +31,8 @@ export default {
   methods: {
     addMessage() {},
     sendData() {
-      console.log(this.userText)
+      this.$socket.emit('userMessage', this.userText)
+      this.userText = ''
     },
   },
 }
@@ -36,6 +40,8 @@ export default {
 
 <style lang="postcss">
 .chat {
+  display: flex;
+  justify-content: space-between;
 }
 .chat__form {
   display: flex;
@@ -46,6 +52,7 @@ export default {
   background-color: var(--bg-color);
 }
 .chat-overflow {
+  margin-top: 45px;
   height: inherit;
   display: flex;
   flex-direction: column;

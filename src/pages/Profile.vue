@@ -67,6 +67,7 @@ export default {
   async mounted() {
     this.pending = true
     try {
+      // TODO: move to store
       const { data = {} } = await axios.get(`/api/profile/info/${this.$route.params.id}`)
       this.pending = false
       this.profile = data
