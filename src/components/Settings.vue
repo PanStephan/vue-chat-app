@@ -13,7 +13,7 @@
 <script>
 import themeSwitcher from './UI/ThemeSwitcher'
 import modal from './UI/Modal'
-import imgUploader from './ImgUploader'
+import imgUploader from './UI/ImgUploader'
 
 export default {
   components: { themeSwitcher, modal, imgUploader },

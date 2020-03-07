@@ -1,5 +1,5 @@
 <template>
-  <!-- TODO: add a autoscroll -->
+  <!-- TODO: add an autoscroll -->
   <section class="chat">
     <div class="chat-overflow">
       <ul class="chat-message__list">
@@ -7,22 +7,26 @@
           message
         </div>
       </ul>
-      <form @submit.prevent="sendData" class="chat__form chat-form">
+      <form ref="form" @submit.prevent="sendData" class="chat__form chat-form">
         <input type="text" v-model="userText" class="g-input g-input--fluid" />
-        <button type="submit" class="g-button g-form-button">Send</button>
+        <button type="submit" class="g-button g-form-button" @click="addMessage">Send</button>
       </form>
     </div>
   </section>
 </template>
 
 <script>
+// import autoscroll from '../utils/autoscroll'
+
 export default {
   data() {
     return {
       userText: null,
     }
   },
+  // TODO: socket
   methods: {
+    addMessage() {},
     sendData() {
       console.log(this.userText)
     },
@@ -46,5 +50,19 @@ export default {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+}
+.chat-message__item {
+  padding: 15px;
+  background-color: var(--bg-color);
+  color: var(--fz-color);
+  border-radius: 15px;
+  border: 2px solid var(--secondary-color);
+  margin: 15px 0;
+}
+.chat-message__item:first-child {
+  margin-top: 0;
+}
+.chat-message__item:last-child {
+  margin-bottom: 0;
 }
 </style>
