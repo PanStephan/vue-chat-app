@@ -1,20 +1,22 @@
 <template>
   <mainPage>
     <div class="main-page__wrapper">
-      <aside class="menu">
+      <aside class="menu__left menu-left">
         <burgerMenu @toggleBurger="toggleAside" />
         <!-- TODO: add a styles -->
-        <ul :class="isAsideOpen ? 'menu__list' : 'menu__list menu__list--close'">
-          <li v-for="menu in 5" :key="menu" class="menu__item">
-            <a href="" class="menu__link">menu-item</a>
+        <ul v-show="isAsideOpen">
+          <li v-for="menu in 5" :key="menu" class="menu-left__item">
+            <span class="menu-left__link">menu-item</span>
           </li>
         </ul>
       </aside>
       <section class="all-chats">
+        <!-- TODO: just to imolement server work -->
         <div class="all-chats__loader">
           <loader v-if="pending" />
           <div v-else>{{ profile.login }}</div>
         </div>
+        <!--  -->
         <input type="text" class="all-chats__search g-input--fluid" placeholder="Search..." />
         <ul class="all-chats__list">
           <li v-for="chats in 5" :key="chats" class="all-chats__item">
@@ -85,12 +87,11 @@ export default {
 
 <style lang="postcss">
 .all-chats {
-  margin-right: 25px;
-  margin-left: 10px;
+  margin-right: 30px;
+  margin-left: 20px;
 }
 .main-page__wrapper {
-  display: grid;
-  grid-template-columns: 2fr 4fr 5fr;
+  display: flex;
 }
 .all-chats__search {
   border: 0;
@@ -151,31 +152,30 @@ export default {
 .menu__right {
   margin-left: 25px;
 }
-.menu {
-  margin-right: 10px;
+.menu__left {
+  margin-right: 20px;
 }
-.menu__list {
+.menu-left__list {
   margin-top: 50px;
 }
-.menu__list--close {
-  width: 0;
-}
-.menu__item {
-  height: 55px;
+.menu-left__item {
+  height: 45px;
+  width: 140px;
   color: var(--font-color);
   cursor: pointer;
-  margin: 15px 0;
+  margin: 10px 0;
   border-left: 5px solid transparent;
   display: flex;
   align-items: center;
   transition: border var(--default-transition);
 }
-.menu__item:hover {
+.menu-left__item:hover {
   border-left: 5px solid var(--border-color);
 }
-.menu__link {
+.menu-left__link {
   display: inline-block;
   margin-left: 10px;
+  color: var(--fz-color);
 }
 .all-chats__loader {
   display: flex;
