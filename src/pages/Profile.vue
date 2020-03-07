@@ -75,8 +75,10 @@ export default {
   methods: {
     toggleAside(isOpen) {
       this.isAsideOpen = isOpen
-      console.log(this.isAsideOpen)
     },
+  },
+  sockets: {
+    connect() {},
   },
 }
 </script>

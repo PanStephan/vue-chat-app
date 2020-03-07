@@ -3,12 +3,18 @@ const bodyParser = require('body-parser')
 const mongoose = require('mongoose')
 const passport = require('passport')
 const passportStrategy = require('./middleware/passport-strategy')
+const http = require('http')
+const socketio = require('socket.io')
 
 const authRouters = require('./routers/auth.routers')
 const profileRouters = require('./routers/profile.routers')
 const keys = require('./keys')
 
 const app = express()
+const server = http.createServer(app)
+const io = socketio(server)
+
+io.on('connect', () => {})
 
 mongoose
   .connect(keys.MONGO_URI, {
@@ -31,4 +37,4 @@ app.use('/api/profile', profileRouters)
 
 const port = process.env.PORT || 3000
 
-app.listen(port, () => console.log(`Server listening on http://localhost:${port}`))
+server.listen(port, () => console.log(`Server listening on http://localhost:${port}`))
