@@ -12,7 +12,12 @@ const devWebpackConfig = merge.smart(baseWebpackConfig, {
         target: 'http://localhost:3000',
         secure: false,
         changeOrigin: true,
-      }
+      },
+      '/socket.io/**': {
+        target: 'http://localhost:3000',
+        secure: false,
+        changeOrigin: true,
+      },
     }
   },
   module: {
