@@ -11,9 +11,9 @@ const userSchema = new Schema({
     required: true,
     minLength: 5,
   },
-  profile: {
-    type: Object,
-    require: true,
+  conversations: {
+    type: Array,
+    required: false,
   },
 })
 
