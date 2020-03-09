@@ -41,7 +41,6 @@ module.exports.signUp = async (req, res) => {
       const user = new User({
         login: req.body.login,
         password: bcrypt.hashSync(req.body.password, salt),
-        profile: {},
       })
 
       await user.save()

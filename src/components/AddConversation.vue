@@ -29,7 +29,10 @@ export default {
     async onSubmit() {
       try {
         // TODO: move to store
-        await axios.post(`/api/profile/new-conversation/`, { login: this.inputData })
+        await axios.post(`/api/profile/new-conversation/`, {
+          login: this.inputData,
+          userId: this.$route.params.id,
+        })
         // TODO: create conversation
         console.log('success')
       } catch (e) {

@@ -13,9 +13,17 @@ module.exports.getProfileData = async (req, res) => {
 
 module.exports.addConversation = async (req, res) => {
   try {
-    const profile = await User.find({ login: req.body.login })
-    if (profile.length === 0) res.status(404).send()
-    console.log(profile)
+    const addedUser = await User.findOne({ login: req.body.login })
+    const user = await User.findById(req.body.userId)
+
+    if (!addedUser) return res.status(404).send()
+
+    user.conversations.push(addedUser.id)
+    addedUser.conversations.push(user.id)
+
+    user.save()
+    addedUser.save()
+
     res.status(201).send()
   } catch (e) {
     res.status(500).send()
