@@ -14,7 +14,6 @@
 
 <script>
 import modal from './UI/Modal'
-import axios from 'axios'
 
 export default {
   components: { modal },
@@ -28,8 +27,7 @@ export default {
     // TODO: create a error modal
     async onSubmit() {
       try {
-        // TODO: move to store
-        await axios.post(`/api/profile/new-conversation/`, {
+        await this.$store.dispatch('addConversation', {
           login: this.inputData,
           userId: this.$route.params.id,
         })

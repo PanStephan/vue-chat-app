@@ -47,8 +47,6 @@
 </template>
 
 <script>
-import axios from 'axios'
-
 import mainPage from '../layouts/Main'
 import burgerMenu from '../components/UI/BurgerMenu'
 import loader from '../components/UI/Loader'
@@ -67,10 +65,9 @@ export default {
   async mounted() {
     this.pending = true
     try {
-      // TODO: move to store
-      const { data = {} } = await axios.get(`/api/profile/info/${this.$route.params.id}`)
+      await this.$store.dispatch('fetchProfileData', this.$route.params.id)
       this.pending = false
-      this.profile = data
+      this.profile = this.$store.getters.getProfileData
     } catch (e) {
       console.log(e)
     }

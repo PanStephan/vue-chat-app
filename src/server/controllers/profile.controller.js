@@ -4,6 +4,7 @@ module.exports.getUserData = async (req, res) => {
   try {
     const profile = await User.findOne({ _id: req.params.id })
     if (profile) {
+      // TODO: dont send a password
       res.send(profile)
     }
   } catch (e) {
