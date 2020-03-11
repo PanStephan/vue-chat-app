@@ -1,4 +1,5 @@
 import axios from 'axios'
+import setHeader from '../utils/interceptors'
 
 export default {
   state: {
@@ -19,12 +20,12 @@ export default {
         const userData = await axios.post('/api/auth/sign_in', data)
         const { token, id } = userData.data
         commit('setToken', token)
+        setHeader(token)
         commit('setId', id)
       } catch (e) {
         console.log(e)
       }
     },
-    // dont wrap comment
     // prettier-ignore
     async signUp({}, data) {  // eslint-disable-line  
     // prettier-enable
@@ -41,6 +42,9 @@ export default {
     },
     getId(state) {
       return state.id
+    },
+    isAuth(state) {
+      return !!state.token
     },
   },
 }

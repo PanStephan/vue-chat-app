@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import store from '../store/'
 
 // pages imports
 import Entrance from '../pages/Entrance.vue'
@@ -17,24 +18,15 @@ export default [
     path: '/profile/:id',
     component: Profile,
     name: 'profile',
-    // async beforeEnter(to, from, next) {
-    //   // TODO: check token value
-
-    //   try {
-    //     const authData = store.getters.isAuth
-    //     console.log(authData)
-    //     if (hasPermission) {
-    //       next({
-    //         name: 'profile',
-    //         query: { to: store.getters.getId },
-    //       })
-    //     }
-    //   } catch (e) {
-    //     next({
-    //       name: 'login',
-    //       query: { message: 'login_before' },
-    //     })
-    //   }
-    // },
+    async beforeEnter(to, from, next) {
+      if (!store.getters.isAuth) {
+        next({
+          name: 'login',
+          query: { message: 'login_before' },
+        })
+      } else {
+        
+      }
+    },
   },
 ]
