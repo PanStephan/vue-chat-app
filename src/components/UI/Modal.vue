@@ -19,9 +19,7 @@ export default {
   props: {
     title: {
       type: String,
-      // TODO : required add
-      // required: true
-      default: 'text',
+      required: true,
     },
   },
   data() {

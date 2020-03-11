@@ -4,7 +4,6 @@ export default {
   state: {
     token: null,
     id: null,
-    profile: null,
   },
   mutations: {
     setToken(state, token) {
@@ -17,9 +16,10 @@ export default {
   actions: {
     async signIn({ commit }, data) {
       try {
-        const token = await axios.post('/api/auth/sign_in', data)
-        commit('setToken', token.data.token)
-        commit('setId', token.data.id)
+        const userData = await axios.post('/api/auth/sign_in', data)
+        const { token, id } = userData.data
+        commit('setToken', token)
+        commit('setId', id)
       } catch (e) {
         console.log(e)
       }
