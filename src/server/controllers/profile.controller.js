@@ -1,6 +1,6 @@
 const User = require('../models/user.model')
 
-module.exports.getProfileData = async (req, res) => {
+module.exports.getUserData = async (req, res) => {
   try {
     const profile = await User.findOne({ _id: req.params.id })
     if (profile) {

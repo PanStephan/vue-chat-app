@@ -11,10 +11,6 @@ const userSchema = new Schema({
     required: true,
     minLength: 5,
   },
-  conversations: {
-    type: Array,
-    required: false,
-  },
 })
 
 module.exports = model('users', userSchema)
