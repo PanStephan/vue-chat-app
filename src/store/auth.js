@@ -1,5 +1,8 @@
 import axios from 'axios'
 import setHeader from '../utils/interceptors'
+import Cookie from 'cookie'
+import Cookies from 'js-cookie'
+import jwtDecode from 'jwt-decode'
 
 export default {
   state: {
@@ -10,6 +13,7 @@ export default {
   mutations: {
     setToken(state, token) {
       state.token = token
+      Cookies.set('jwt-token', token)
     },
     setId(state, id) {
       state.id = id
@@ -19,17 +23,43 @@ export default {
         state.isLogin = true
       } else state.isLogin = false
     },
+    clearToken(state) {
+      state.token = false
+    },
   },
   actions: {
+    // TODO: autoRedirect
+    autoLogin({ dispatch }) {
+      const cookieStr = process.browser ? document.cookie : this.app.context.req.headers.cookie
+
+      const cookies = Cookie.parse(cookieStr || '') || {}
+      const token = cookies['jwt-token']
+
+      if (isJWTValid(token)) {
+        dispatch('setToken', token)
+      } else {
+        dispatch('logout')
+      }
+    },
+    logout({ commit, dispatch }) {
+      dispatch('setToken', null)
+      commit('clearToken')
+      Cookies.remove('jwt-token')
+    },
     removeIsLogin({ state }) {
       state.isLogin = null
     },
-    async signIn({ commit }, data) {
+    setToken({ commit }, token) {
+      setHeader(token)
+      commit('setToken', token)
+      Cookies.set('jwt-token', token)
+    },
+    async signIn({ commit, dispatch }, data) {
       try {
         const userData = await axios.post('/api/auth/sign_in', data)
         const { token, id } = userData.data
-        setHeader(token)
-        commit('setToken', token)
+        // TODO: check a valid
+        dispatch('setToken', token)
         commit('setId', id)
         commit('setIsLogin', userData.status)
       } catch (e) {
@@ -47,17 +77,20 @@ export default {
     }
   },
   getters: {
-    getToken(state) {
-      return state.token
-    },
-    getId(state) {
-      return state.id
-    },
-    getIsLogin(state) {
-      return state.isLogin
-    },
-    // isAuth(state) {
-    //   return !!state.token
-    // },
+    getToken: state => state.token,
+    getId: state => state.id,
+    getIsLogin: state => state.isLogin,
+    isAuthenticated: state => !!state.token,
   },
+}
+
+function isJWTValid(token) {
+  if (!token) {
+    return false
+  }
+
+  const jwtData = jwtDecode(token) || {}
+  const expires = jwtData.exp || 0
+
+  return new Date().getTime() / 1000 < expires
 }
