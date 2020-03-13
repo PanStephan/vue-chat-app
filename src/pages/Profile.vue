@@ -1,10 +1,8 @@
 <template>
   <mainPage>
     <div class="main-page__wrapper">
-      <errorMessage text="error" :isError="true"/>
       <aside class="menu__left menu-left">
         <burgerMenu @toggleBurger="toggleAside" />
-        <!-- TODO: add a styles -->
         <ul v-show="isAsideOpen">
           <li v-for="menu in 5" :key="menu" class="menu-left__item">
             <span class="menu-left__link">menu-item</span>
@@ -12,7 +10,7 @@
         </ul>
       </aside>
       <section class="all-chats">
-        <!-- TODO: just to imolement server work -->
+        <!-- TODO: delete it -->
         <div class="all-chats__loader">
           <loader v-if="pending" />
           <div v-else>{{ profile.login }}</div>
@@ -52,10 +50,10 @@ import mainPage from '../layouts/Main'
 import burgerMenu from '../components/UI/BurgerMenu'
 import loader from '../components/UI/Loader'
 import chat from '../components/Chat'
-import errorMessage from '../components/UI/ErrorMessage'
 
+// TODO: profile erorr handler 
 export default {
-  components: { mainPage, burgerMenu, loader, chat, errorMessage },
+  components: { mainPage, burgerMenu, loader, chat },
   data() {
     return {
       profile: null,

@@ -1,6 +1,7 @@
 <template>
   <empty>
     <div class="form-wrapper">
+      <errorMessage :errorText="errorMsg"/>
       <form v-show="isAcc" class="entrance-form" @submit.prevent="onLoginSubmit">
         <div class="entrance-form__item">
           <div v-if="!$v.loginForm.login.email" class="entrance-form__error">
@@ -91,10 +92,12 @@
 import { required, minLength, email, sameAs } from 'vuelidate/lib/validators'
 
 import empty from '../layouts/Empty'
+import errorMessage from '../components/UI/ErrorMessage'
 export default {
-  components: { empty },
+  components: { empty, errorMessage },
   data() {
     return {
+      errorMsg: null,
       loginForm: {
         password: null,
         login: null,
@@ -162,8 +165,20 @@ export default {
           this.loginForm.login = null
           this.loginForm.password = null
         } catch (e) {
-          // TODO: msg about err
-          console.log(e)
+          switch(e.response.status) {
+            case 404: {
+              this.errorMsg = 'user not found'
+              break
+            }
+            case 401: {
+              this.errorMsg = 'password isnt correct'
+              break
+            }
+            default: {
+              this.errorMsg = 'server error'
+              break
+            }
+          }
         }
       }
     },
@@ -187,7 +202,13 @@ export default {
           this.signUpForm.repeatPassword = null
           this.isAcc = true
         } catch (e) {
-          console.log(e)
+          console.log(e.response.status)
+          switch(e.response.status) {
+            case 409: {
+              this.errorMsg = 'login is occupied'
+              break
+            }
+          }
         }
       }
     },

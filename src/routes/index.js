@@ -2,7 +2,6 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import store from '../store/'
 
-// pages imports
 import Entrance from '../pages/Entrance.vue'
 import Profile from '../pages/Profile.vue'
 
@@ -18,6 +17,9 @@ export default [
     path: '/profile/:id',
     component: Profile,
     name: 'profile',
+    // work uncorrect
+    // TODO: check it
+    // only for an autologin check!!!
     async beforeEnter(to, from, next) {
       if (store.getters.isAuthenticated) {
         next()

@@ -1,7 +1,7 @@
 <template>
   <div class="img-loader">
     <!-- TODO: acc,  style -->
-    <input type="file" id="img-loader" @change="uploadFile" class="img-loader__input" />
+    <input id="img-loader" type="file" class="img-loader__input" @change="uploadFile" />
     <label for="img-loader" class="g-input g-input--fluid img-loader__label img-loader-label">
       <span class="img-loader-label__text">Choose a file {{ fileName ? fileName : '' }}</span>
     </label>
