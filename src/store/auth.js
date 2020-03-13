@@ -53,11 +53,7 @@ export default {
     // prettier-ignore
     async signUp({}, data) {  // eslint-disable-line  
     // prettier-enable
-      try {
-        await axios.post('/api/auth/sign_up', data)
-      } catch (e) {
-        console.log(e)
-      }
+      await axios.post('/api/auth/sign_up', data)
     }
   },
   getters: {
