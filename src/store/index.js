@@ -6,7 +6,6 @@ import profile from './profile'
 
 Vue.use(Vuex)
 
-// TODO: err boundary
 export default new Vuex.Store({
   modules: { auth, profile },
 })
