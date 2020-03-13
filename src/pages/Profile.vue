@@ -18,7 +18,7 @@
         <!--  -->
         <input type="text" class="all-chats__search g-input--fluid" placeholder="Search..." />
         <ul class="all-chats__list">
-          <li v-for="conversation in conversations" :key="conversation._id" class="all-chats__item">
+          <li v-for="conversation in conversations" :key="conversation._id" :data-conversation-id="conversation._id" class="all-chats__item" @click="openChat">
             <!-- TODO: img alt -->
             <img src="../assets/images/user.png" alt="" class="all-chats__img" />
             <div class="all-chats__body all-chats-body">
@@ -78,10 +78,15 @@ export default {
     toggleAside(isOpen) {
       this.isAsideOpen = isOpen
     },
+    openChat(el) {
+      // this.$route.params.id
+      // event.target.closest('.all-chats__item').getAttribute('data-conversation-id')
+      
+    }
   },
-  sockets: {
-    connect() {},
-  },
+  // sockets: {
+  //   connect() {},
+  // },
 }
 </script>
 
@@ -117,6 +122,9 @@ export default {
 }
 .all-chats-body__name {
   color: var(--font-color);
+  width: 85px;
+  /* TODO: watch a word-wrap opt */
+  word-wrap: break-word;
   font-size: 15px;
   margin-bottom: 5px;
 }

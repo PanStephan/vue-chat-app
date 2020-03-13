@@ -4,6 +4,7 @@ const baseWebpackConfig = require('./webpack.config.base')
 
 const devWebpackConfig = merge.smart(baseWebpackConfig, {
   mode: 'development',
+  watch: true,
   devServer: {
     port: 8080,
     hot: true,
