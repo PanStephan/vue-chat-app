@@ -11,10 +11,12 @@ const userSchema = new Schema({
     required: true,
     minLength: 5,
   },
-  conversations: {
-    type: String,
-    required: false,
-  },
+  conversations: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'profile',
+    }
+  ],
 })
 
 module.exports = model('users', userSchema)
