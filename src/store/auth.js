@@ -45,15 +45,10 @@ export default {
       Cookies.set('jwt-token', token)
     },
     async signIn({ commit, dispatch }, data) {
-      try {
-        const userData = await axios.post('/api/auth/sign_in', data)
-        const { token, id } = userData.data
-        dispatch('setToken', token)
-        commit('setId', id)
-        return userData
-      } catch (e) {
-        console.log(e)
-      }
+      const userData = await axios.post('/api/auth/sign_in', data)
+      const { token, id } = userData.data
+      dispatch('setToken', token)
+      commit('setId', id)
     },
     // prettier-ignore
     async signUp({}, data) {  // eslint-disable-line  

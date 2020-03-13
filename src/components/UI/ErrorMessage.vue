@@ -1,24 +1,39 @@
 <template>
-  <div class="error-message" v-if="isError">
-    <img :src="img.src" :alt="img.alt" v-if="img" class="error-message__img">
-    <span class="error-message__text">{{text}}</span>
+  <div class="error-message" :class="extraClass" v-if="isShowMsg">
+    <img :src="img.src" v-if="img" :alt="img.alt" class="error-message__img">
+    <span class="error-message__text">{{errorText}}</span>
   </div>
 </template>
 
 <script>
 export default {
   props: {
-    text: {
+    errorText: {
       required: true,
-      type: String
+      type: String | null
     },
     img: {
       required: false,
       type: Object
     },
-    isError: {
-      required: true,
-      type: Boolean
+    extraClass: {
+      required: false,
+      type: 'string'
+    }
+  },
+  data() {
+    return {
+      isShowMsg: false
+    }
+  },
+  watch: {
+    errorText: function(value) {
+      if(value) {
+        this.isShowMsg = true
+        setTimeout(() => {
+          this.isShowMsg = false
+        }, 3000)
+      }
     }
   }
 }
