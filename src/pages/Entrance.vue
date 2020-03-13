@@ -156,6 +156,7 @@ export default {
 
         try {
           await this.$store.dispatch('signIn', data)
+
           this.$router.push(`/profile/${this.$store.getters.getId}`)
           this.$v.loginForm.$reset()
           this.loginForm.login = null
@@ -172,7 +173,6 @@ export default {
 
       this.signUpForm.errors.email = this.$v.signUpForm.email.$anyError
       this.signUpForm.errors.password = this.$v.signUpForm.password.$anyError
-      // TODO: wait backend
       if (!this.$v.signUpForm.$invalid) {
         const data = {
           login: this.signUpForm.email,
@@ -187,7 +187,6 @@ export default {
           this.signUpForm.repeatPassword = null
           this.isAcc = true
         } catch (e) {
-          // TODO: msg about err
           console.log(e)
         }
       }

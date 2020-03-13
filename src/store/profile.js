@@ -25,8 +25,6 @@ export default {
     },
   },
   getters: {
-    getProfileData(state) {
-      return state.profileData
-    },
+    getProfileData: state => state.profileData,
   },
 }

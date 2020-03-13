@@ -7,6 +7,7 @@
       <div class="main-header__right">
         <settings class="main-header__settings" />
         <profile class="main-header__profile" />
+        <div class="main-page__logout" @click="logout">Logout</div>
       </div>
     </header>
     <main>
@@ -24,6 +25,12 @@ import profile from '../components/UI/Profile'
 
 export default {
   components: { settings, profile },
+  methods: {
+    logout() {
+      this.$store.dispatch('logout')
+      this.$router.push('/?message=logout')
+    },
+  },
 }
 </script>
 

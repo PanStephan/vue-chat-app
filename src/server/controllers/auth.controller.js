@@ -21,10 +21,10 @@ module.exports.signIn = async (req, res) => {
         )
         res.json({ token, id: candidate._id, profile: candidate.profile })
       } else {
-        res.status(401).json({ message: 'Пароль неверен' })
+        res.status(401).json({ message: 'Password uncorrect' })
       }
     } else {
-      res.status(404).json({ message: 'Пользователь не найден' })
+      res.status(404).json({ message: 'User not found' })
     }
   } catch (e) {
     res.status(500).send()
@@ -35,7 +35,7 @@ module.exports.signUp = async (req, res) => {
   try {
     const candidate = await User.findOne({ login: req.body.login })
     if (candidate) {
-      res.status(409).json({ message: 'Такой login уже занят' })
+      res.status(409).json({ message: 'login is occupied' })
     } else {
       const salt = bcrypt.genSaltSync(10)
       const user = new User({
