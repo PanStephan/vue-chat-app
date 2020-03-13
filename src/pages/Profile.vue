@@ -18,13 +18,13 @@
         <!--  -->
         <input type="text" class="all-chats__search g-input--fluid" placeholder="Search..." />
         <ul class="all-chats__list">
-          <li v-for="chats in 5" :key="chats" class="all-chats__item">
+          <li v-for="conversation in conversations" :key="conversation._id" class="all-chats__item">
             <!-- TODO: img alt -->
             <img src="../assets/images/user.png" alt="" class="all-chats__img" />
             <div class="all-chats__body all-chats-body">
               <div class="all-chats-body__message">
                 <div class="all-chats-body__name">
-                  name
+                  {{conversation.login}}
                 </div>
                 <p class="all-chats-body__text">
                   message
@@ -57,6 +57,7 @@ export default {
   data() {
     return {
       profile: null,
+      conversations: null,
       pending: true,
       isAsideOpen: false,
     }
@@ -66,7 +67,9 @@ export default {
     try {
       await this.$store.dispatch('fetchProfileData', this.$route.params.id)
       this.pending = false
-      this.profile = this.$store.getters.getProfileData
+      const {profile, conversations} = this.$store.getters.getProfileData
+      this.profile = profile
+      this.conversations = conversations
     } catch (e) {
       console.log(e)
     }

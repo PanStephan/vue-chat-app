@@ -202,7 +202,6 @@ export default {
           this.signUpForm.repeatPassword = null
           this.isAcc = true
         } catch (e) {
-          console.log(e.response.status)
           switch(e.response.status) {
             case 409: {
               this.errorMsg = 'login is occupied'
