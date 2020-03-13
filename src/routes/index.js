@@ -18,16 +18,16 @@ export default [
     path: '/profile/:id',
     component: Profile,
     name: 'profile',
-    async beforeEnter(to, from, next) {
-      if (store.getters.getIsLogin) {
-        next()
-        store.dispatch('removeIsLogin')
-      } else {
-        next({
-          name: 'login',
-          query: { message: 'login_before' },
-        })
-      }
-    },
+    // async beforeEnter(to, from, next) {
+    //   if (store.getters.getIsLogin) {
+    //     next()
+    //     store.dispatch('removeIsLogin')
+    //   } else {
+    //     next({
+    //       name: 'login',
+    //       query: { message: 'login_before' },
+    //     })
+    //   }
+    // },
   },
 ]
