@@ -8,7 +8,6 @@ export default {
   state: {
     token: null,
     id: null,
-    isLogin: null,
   },
   mutations: {
     setToken(state, token) {
@@ -18,17 +17,11 @@ export default {
     setId(state, id) {
       state.id = id
     },
-    setIsLogin(state, status) {
-      if (status === 200) {
-        state.isLogin = true
-      } else state.isLogin = false
-    },
     clearToken(state) {
       state.token = false
     },
   },
   actions: {
-    // TODO: autoRedirect
     autoLogin({ dispatch }) {
       const cookieStr = process.browser ? document.cookie : this.app.context.req.headers.cookie
 
@@ -46,9 +39,6 @@ export default {
       commit('clearToken')
       Cookies.remove('jwt-token')
     },
-    removeIsLogin({ state }) {
-      state.isLogin = null
-    },
     setToken({ commit }, token) {
       setHeader(token)
       commit('setToken', token)
@@ -58,10 +48,9 @@ export default {
       try {
         const userData = await axios.post('/api/auth/sign_in', data)
         const { token, id } = userData.data
-        // TODO: check a valid
         dispatch('setToken', token)
         commit('setId', id)
-        commit('setIsLogin', userData.status)
+        return userData
       } catch (e) {
         console.log(e)
       }
@@ -79,7 +68,6 @@ export default {
   getters: {
     getToken: state => state.token,
     getId: state => state.id,
-    getIsLogin: state => state.isLogin,
     isAuthenticated: state => !!state.token,
   },
 }
