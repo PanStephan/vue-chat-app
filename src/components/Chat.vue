@@ -3,7 +3,10 @@
   <section class="chat">
     <div class="chat-overflow">
       <ul class="chat-message__list">
-        <div v-for="message in 5" :key="message" class="chat-message__item">
+        <div v-for="message in profileMessages" :key="message" class="chat-message__item">
+          message
+        </div>
+        <div v-for="message in userMessages" :key="message" class="chat-message__item">
           message
         </div>
       </ul>
@@ -26,6 +29,16 @@ export default {
     return {
       userText: null,
     }
+  },
+  props: {
+    profileMessages: {
+      type: Array | null,
+      required: true,
+    },
+    userMessages: {
+      type: Array | null,
+      required: true,
+    },
   },
   // TODO: socket
   methods: {

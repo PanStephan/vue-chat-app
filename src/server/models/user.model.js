@@ -15,7 +15,13 @@ const userSchema = new Schema({
     {
       type: Schema.Types.ObjectId,
       ref: 'profile',
-    }
+    },
+  ],
+  messages: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'profile',
+    },
   ],
 })
 

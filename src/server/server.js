@@ -8,6 +8,7 @@ const socketio = require('socket.io')
 
 const authRouters = require('./routers/auth.routers')
 const profileRouters = require('./routers/profile.routers')
+const messagesRouters = require('./routers/messages.routers')
 const keys = require('./keys')
 
 const app = express()
@@ -32,6 +33,7 @@ app.use(bodyParser.json())
 // routers
 app.use('/api/auth', authRouters)
 app.use('/api/profile', profileRouters)
+app.use('/api/messages', messagesRouters)
 
 const port = process.env.PORT || 3000
 
@@ -39,5 +41,5 @@ server.listen(port, () => console.log(`Server listening on http://localhost:${po
 
 module.exports = {
   io,
-  app
+  app,
 }
