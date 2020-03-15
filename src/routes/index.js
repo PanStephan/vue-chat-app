@@ -21,7 +21,8 @@ export default [
     // TODO: check it
     // only for an autologin check!!!
     async beforeEnter(to, from, next) {
-      if (store.getters.isAuthenticated) {
+      // TODO: do a regular autologin
+      if (store.getters.isAuthenticated || process.env.NODE_ENV === 'development') {
         next()
       } else {
         next({
