@@ -3,12 +3,12 @@
   <section class="chat">
     <div class="chat-overflow">
       <ul class="chat-message__list">
-        <div class="chat-message__item" v-for="message in 5" :key="message">
+        <div v-for="message in 5" :key="message" class="chat-message__item">
           message
         </div>
       </ul>
-      <form ref="form" @submit.prevent="sendData" class="chat__form chat-form">
-        <input type="text" v-model="userText" class="g-input g-input--fluid" />
+      <form ref="form" class="chat__form chat-form" @submit.prevent="sendData">
+        <input v-model="userText" type="text" class="g-input g-input--fluid" />
         <button type="submit" class="g-button g-form-button" @click="addMessage">Send</button>
       </form>
     </div>

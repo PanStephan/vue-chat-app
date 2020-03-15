@@ -1,6 +1,6 @@
 <template>
-  <div class="error-message" :class="extraClass" v-if="isShowMsg">
-    <img :src="img.src" v-if="img" :alt="img.alt" class="error-message__img">
+  <div class="error-message" v-if="isShowMsg" :class="extraClass">
+    <img v-if="img" :src="img.src" :alt="img.alt" class="error-message__img">
     <span class="error-message__text">{{errorText}}</span>
   </div>
 </template>
@@ -14,11 +14,12 @@ export default {
     },
     img: {
       required: false,
-      type: Object
+      type: Object,
+      default: null
     },
     extraClass: {
       required: false,
-      type: 'string'
+      type: String
     }
   },
   data() {
