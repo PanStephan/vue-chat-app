@@ -25,6 +25,7 @@
             @click="openChat"
           >
             <!-- TODO: img alt -->
+            <div class="all-chats-body__close-btn" @click="removeConversation"></div>
             <img src="../assets/images/user.png" alt="" class="all-chats__img" />
             <div class="all-chats__body all-chats-body">
               <div class="all-chats-body__message">
@@ -90,16 +91,36 @@ export default {
       // TODO: move to store
       try {
         const userId = event.target.closest('.all-chats__item').getAttribute('data-conversation-id')
-        const res = await axios.post('/api/messages', { profileId: this.$route.params.id, userId })
-        const { profileMessages, userMessages } = res.data
+        await this.$store.dispatch('openChat', { profileId: this.$route.params.id, userId })
+
+        const { profileMessages, userMessages } = this.$store.getters.getMessagesData
 
         this.profileMessages = profileMessages
         this.userMessages = userMessages
+
       } catch (e) {
         console.log(e)
       }
     },
-  },
+    async removeConversation() {
+      try {
+        const userId = event.target.closest('.all-chats__item').getAttribute('data-conversation-id')
+
+        await this.$store.dispatch('removeConversation', {
+          login: userId,
+          userId: this.$route.params.id,
+        })
+
+        const { profile, conversations } = this.$store.getters.getProfileData
+        this.profile = profile
+        this.conversations = conversations
+
+      } catch (e) {
+        if (e.response.status === 404) return console.log('404')
+        console.log('500')
+      }
+    },
+  }
   // sockets: {
   //   connect() {},
   // },
@@ -205,5 +226,30 @@ export default {
 .all-chats__loader {
   display: flex;
   justify-content: center;
+}
+.all-chats-body__close-btn {
+  width: 7px;
+  height: 7px;
+  position: relative;
+  opacity: 0;
+  margin-right: 10px;
+}
+.all-chats__item:hover .all-chats-body__close-btn {
+  opacity: 1;
+  transition: var(--default-transition);
+}
+.all-chats-body__close-btn:before, .all-chats-body__close-btn:after {
+  position: absolute;
+  left: 5px;
+  content: '';
+  height: 10px;
+  width: 1px;
+  background-color: var(--border-color);
+}
+.all-chats-body__close-btn:before {
+  transform: rotate(45deg);
+}
+.all-chats-body__close-btn:after {
+  transform: rotate(-45deg);
 }
 </style>

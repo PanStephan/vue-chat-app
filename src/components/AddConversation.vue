@@ -32,7 +32,7 @@ export default {
           userId: this.$route.params.id,
         })
         // TODO: create conversation
-        console.log('success')
+        
       } catch (e) {
         if (e.response.status === 404) return console.log('404')
         console.log('500')

@@ -44,7 +44,7 @@ export default {
   methods: {
     addMessage() {},
     sendData() {
-      this.$socket.emit('userMessage', this.userText)
+      this.$socket.emit('userMessage', { from: this.$route.params.id, msg: this.userText })
       this.userText = ''
     },
   },
