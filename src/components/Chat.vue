@@ -3,12 +3,15 @@
   <section class="chat">
     <div class="chat-overflow">
       <ul class="chat-message__list">
-        <div class="chat-message__item" v-for="message in 5" :key="message">
+        <div v-for="message in profileMessages" :key="message" class="chat-message__item">
+          message
+        </div>
+        <div v-for="message in userMessages" :key="message" class="chat-message__item">
           message
         </div>
       </ul>
-      <form ref="form" @submit.prevent="sendData" class="chat__form chat-form">
-        <input type="text" v-model="userText" class="g-input g-input--fluid" />
+      <form ref="form" class="chat__form chat-form" @submit.prevent="sendData">
+        <input v-model="userText" type="text" class="g-input g-input--fluid" />
         <button type="submit" class="g-button g-form-button" @click="addMessage">Send</button>
       </form>
     </div>
@@ -27,11 +30,21 @@ export default {
       userText: null,
     }
   },
+  props: {
+    profileMessages: {
+      type: Array | null,
+      required: true,
+    },
+    userMessages: {
+      type: Array | null,
+      required: true,
+    },
+  },
   // TODO: socket
   methods: {
     addMessage() {},
     sendData() {
-      this.$socket.emit('userMessage', this.userText)
+      this.$socket.emit('userMessage', { from: this.$route.params.id, msg: this.userText })
       this.userText = ''
     },
   },

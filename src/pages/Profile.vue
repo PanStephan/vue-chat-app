@@ -15,16 +15,22 @@
           <loader v-if="pending" />
           <div v-else>{{ profile.login }}</div>
         </div>
-        <!--  -->
         <input type="text" class="all-chats__search g-input--fluid" placeholder="Search..." />
         <ul class="all-chats__list">
-          <li v-for="conversation in conversations" :key="conversation._id" :data-conversation-id="conversation._id" class="all-chats__item" @click="openChat">
+          <li
+            v-for="conversation in conversations"
+            :key="conversation._id"
+            :data-conversation-id="conversation._id"
+            class="all-chats__item"
+            @click="openChat"
+          >
             <!-- TODO: img alt -->
+            <div class="all-chats-body__close-btn" @click="removeConversation"></div>
             <img src="../assets/images/user.png" alt="" class="all-chats__img" />
             <div class="all-chats__body all-chats-body">
               <div class="all-chats-body__message">
                 <div class="all-chats-body__name">
-                  {{conversation.login}}
+                  {{ conversation.login }}
                 </div>
                 <p class="all-chats-body__text">
                   message
@@ -39,19 +45,20 @@
         </ul>
       </section>
       <div class="menu__right">
-        <chat />
+        <chat :profileMessages="profileMessages" :userMessages="userMessages" />
       </div>
     </div>
   </mainPage>
 </template>
 
 <script>
+import axios from 'axios'
+
 import mainPage from '../layouts/Main'
 import burgerMenu from '../components/UI/BurgerMenu'
 import loader from '../components/UI/Loader'
 import chat from '../components/Chat'
-
-// TODO: profile erorr handler 
+// TODO: profile erorr handler
 export default {
   components: { mainPage, burgerMenu, loader, chat },
   data() {
@@ -60,6 +67,8 @@ export default {
       conversations: null,
       pending: true,
       isAsideOpen: false,
+      userMessages: null,
+      profileMessages: null,
     }
   },
   async mounted() {
@@ -67,7 +76,7 @@ export default {
     try {
       await this.$store.dispatch('fetchProfileData', this.$route.params.id)
       this.pending = false
-      const {profile, conversations} = this.$store.getters.getProfileData
+      const { profile, conversations } = this.$store.getters.getProfileData
       this.profile = profile
       this.conversations = conversations
     } catch (e) {
@@ -78,12 +87,40 @@ export default {
     toggleAside(isOpen) {
       this.isAsideOpen = isOpen
     },
-    openChat(el) {
-      // this.$route.params.id
-      // event.target.closest('.all-chats__item').getAttribute('data-conversation-id')
-      
-    }
-  },
+    async openChat() {
+      // TODO: move to store
+      try {
+        const userId = event.target.closest('.all-chats__item').getAttribute('data-conversation-id')
+        await this.$store.dispatch('openChat', { profileId: this.$route.params.id, userId })
+
+        const { profileMessages, userMessages } = this.$store.getters.getMessagesData
+
+        this.profileMessages = profileMessages
+        this.userMessages = userMessages
+
+      } catch (e) {
+        console.log(e)
+      }
+    },
+    async removeConversation() {
+      try {
+        const userId = event.target.closest('.all-chats__item').getAttribute('data-conversation-id')
+
+        await this.$store.dispatch('removeConversation', {
+          login: userId,
+          userId: this.$route.params.id,
+        })
+
+        const { profile, conversations } = this.$store.getters.getProfileData
+        this.profile = profile
+        this.conversations = conversations
+
+      } catch (e) {
+        if (e.response.status === 404) return console.log('404')
+        console.log('500')
+      }
+    },
+  }
   // sockets: {
   //   connect() {},
   // },
@@ -136,6 +173,7 @@ export default {
 .all-chats__item {
   background-color: var(--bg-message-color);
   border-radius: 10px;
+  cursor: pointer;
   padding: 15px;
   height: 85px;
   margin: 15px 0;
@@ -188,5 +226,30 @@ export default {
 .all-chats__loader {
   display: flex;
   justify-content: center;
+}
+.all-chats-body__close-btn {
+  width: 7px;
+  height: 7px;
+  position: relative;
+  opacity: 0;
+  margin-right: 10px;
+}
+.all-chats__item:hover .all-chats-body__close-btn {
+  opacity: 1;
+  transition: var(--default-transition);
+}
+.all-chats-body__close-btn:before, .all-chats-body__close-btn:after {
+  position: absolute;
+  left: 5px;
+  content: '';
+  height: 10px;
+  width: 1px;
+  background-color: var(--border-color);
+}
+.all-chats-body__close-btn:before {
+  transform: rotate(45deg);
+}
+.all-chats-body__close-btn:after {
+  transform: rotate(-45deg);
 }
 </style>

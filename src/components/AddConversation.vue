@@ -4,7 +4,7 @@
     <modal v-show="conversationModal" title="type a mail" @close="conversationModal = false">
       <div slot="body">
         <form @submit.prevent="onSubmit">
-          <input type="text" class="g-input g-input--fluid" v-model="inputData" />
+          <input type="text" v-model="inputData" class="g-input g-input--fluid" />
           <button class="g-button">submit</button>
         </form>
       </div>
@@ -32,7 +32,7 @@ export default {
           userId: this.$route.params.id,
         })
         // TODO: create conversation
-        console.log('success')
+        
       } catch (e) {
         if (e.response.status === 404) return console.log('404')
         console.log('500')

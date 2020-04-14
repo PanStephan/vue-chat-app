@@ -1,7 +1,7 @@
 <template>
   <empty>
     <div class="form-wrapper">
-      <errorMessage :errorText="errorMsg"/>
+      <errorMessage :errorText="errorMsg" />
       <form v-show="isAcc" class="entrance-form" @submit.prevent="onLoginSubmit">
         <div class="entrance-form__item">
           <div v-if="!$v.loginForm.login.email" class="entrance-form__error">
@@ -165,7 +165,7 @@ export default {
           this.loginForm.login = null
           this.loginForm.password = null
         } catch (e) {
-          switch(e.response.status) {
+          switch (e.response.status) {
             case 404: {
               this.errorMsg = 'user not found'
               break
@@ -202,7 +202,7 @@ export default {
           this.signUpForm.repeatPassword = null
           this.isAcc = true
         } catch (e) {
-          switch(e.response.status) {
+          switch (e.response.status) {
             case 409: {
               this.errorMsg = 'login is occupied'
               break
